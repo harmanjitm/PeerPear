@@ -6,11 +6,11 @@ if(isset($_COOKIE["username"])) {
 
    $conn = new mysqli("vconroy.cs.uleth.ca",$username,$password,$username);
 
-   $sql = "UPDATE PROFILE SET bio='$_POST[bio]', status='$_POST[status]', occupation='$_POST[occupation]' WHERE id='$_POST[username]'";
+   $sql = "UPDATE PROFILE SET bio='$_POST[bio]', status='$_POST[status]', occupation='$_POST[occupation]' WHERE id='$_COOKIE[username]'";
    
    if($conn->query($sql)) 
    {
-       echo "<h3>Profile successfully updated!</h3>";
+        header('Location:profile.php?Message=Your profile was successfully updated!'); 
    } else {
         $err = $conn->errno; 
         $errtxt = $conn->error; 
