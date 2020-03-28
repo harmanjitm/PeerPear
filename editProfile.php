@@ -1,20 +1,10 @@
-<!-- <html>
-    <head>
-        <title>CPSC3660 - Profile</title>
-    </head>
-    <body>
-                
-	<p>To view all posts, click <a href="posts.php">here</a>.</p>
-    </body>
-</html> -->
-
 <html style="position: relative; min-height: 100%;">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <title>PeerPear - Profile</title>
+        <title>PeerPear - Edit Profile</title>
     </head>
     <body style="background-color: #E9E9E9; margin-bottom: 60px;">
         <!-- Navbar -->
@@ -57,12 +47,6 @@
             }
         ?>
         <div class="container">
-            <?php 
-                if(!empty($_REQUEST['Message']))
-                {
-                    echo sprintf("<div class=\"alert alert-success\" role=\"alert\">%s</div>", $_REQUEST['Message']);
-                }
-            ?>
             <div class="card">
                 <div class="card-body">
                     <img src="images/profile.png" class="mx-auto d-block rounded" width="17%"></img>
@@ -78,21 +62,17 @@
             
                         if($result) {
                             $rec=$result->fetch_assoc();
-                            echo "<h5 class=\"card-title text-center\">$rec[fname] $rec[lname]</h5>";
-                            echo "<h5 class=\"text-center text-muted lead\">$rec[status]</h5>";
-                            echo "<h5 class=\"text-center lead\">$rec[bio] - $rec[occupation]</h5>";
-                            echo "<div class=\"form-group\"><label>Username</label><input disabled class=\"form-control\" value=\"$rec[username]\"></div>
-                            <div class=\"form-group\"><label>First Name</label><input disabled class=\"form-control\" value=\"$rec[fname]\"></div>
-                            <div class=\"form-group\"><label>Last Name</label><input disabled class=\"form-control\" value=\"$rec[lname]\"></div>
-                            <div class=\"form-group\"><label>Email</label><input disabled class=\"form-control\" value=\"$rec[email]\"></div>
-                            <div class=\"form-group\"><label>DOB</label><input disabled class=\"form-control\" value=\"$rec[dob]\"></div>";
+                            echo "<h5 class=\"lead text-center\">Editing profile for $rec[fname] $rec[lname]</h5>";
+                            echo "
+                            <form method=\"post\" action=\"update_profile.php\">
+                            <div class=\"form-group\"><label>Bio</label><input type=\"text\" name=\"bio\" class=\"form-control\" value=\"$rec[bio]\"></div>
+                            <div class=\"form-group\"><label>Status</label><input type=\"text\" name=\"status\" class=\"form-control\" value=\"$rec[status]\"></div>
+                            <div class=\"form-group\"><label>Occupation</label><input type=\"text\" name=\"occupation\" class=\"form-control\" value=\"$rec[occupation]\"></div>
+                            <div class=\"form-group\"><input name=\"submit\" type=\"submit\" value=\"Save Changes\" class=\"btn btn-primary\"></div></form>";
                         } else {
                             echo "Problem fetching profile.";
                         }
                     ?>
-                    <a href="editProfile.php">
-                        <button type="submit" class="btn btn-primary">Edit Profile</button>
-                    </a>
                 </div>
             </div>
         </div>
