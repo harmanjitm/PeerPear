@@ -67,12 +67,21 @@
                     echo "<div class=\"card w-75 mx-auto\">";
                     echo "<div class=\"card-body\">";
                     echo "<h3 class = \"card-title\">$row[title]</h3>";
+<<<<<<< HEAD
                     echo "<p> <b><i class=\"fas fa-user-circle\"></i> $row[uid]</b></p>";
                     echo "<p class = \"card-text\">$row[body]</p>";
                     echo "<div class=\"btn-group\" role=\"group\" aria-label=\"vote\">";
                     echo "<a href=\"upvote.php?postid= $row[id]\" class=\"btn btn-outline-success\"><i class=\"fas fa-arrow-up\"></i></a>";
                     echo "<button class=\"btn btn-secondary\" disabled><font size=\"1\">$row[upvotes]</font></button>";
                     echo "<a href=\"downvote.php?postid= $row[id]\" class=\"btn btn-outline-danger\"><i class=\"fas fa-arrow-down\"></i></a>";
+=======
+                    echo "<p> <b>By $row[uid]</b></p>";
+                    echo "<p class = \"card-text\">$row[body]</p>";
+                    echo "<p>Upvotes: $row[upvotes]</p>";
+                    echo "<div class=\"btn-group\" role=\"group\" aria-label=\"vote\">";
+                    echo "<a href=\"upvote.php?postid= $row[id]\" class=\"btn btn-success\"><i class=\"fas fa-arrow-up\"></i></a>";
+                    echo "<a href=\"downvote.php?postid= $row[id]\" class=\"btn btn-danger\"><i class=\"fas fa-arrow-down\"></i></a>";
+>>>>>>> 37d31500a62260a79b0617aef3485fef99ea79a3
                     echo "</div>";
                     echo "</div>";
                     echo "</div>";
