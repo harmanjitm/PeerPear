@@ -4,7 +4,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <title>PeerPear - Categories</title>
+        <title>PeerPear - Events</title>
     </head>
     <body style="background-color: #E9E9E9; margin-bottom: 60px;">
         <!-- Navbar -->
@@ -20,10 +20,10 @@
             <!-- Navbar Items-->
             <div class="navbar-collapse collapse" id="navDropdown">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="categories.php">Categories</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="events.php">Events</a>
                     </li>
                 </ul>
@@ -51,25 +51,38 @@
         ?>
         <div class="container">
             <?php
+            if(!empty($_REQUEST['Message']))
+            {
+                echo sprintf("<div class=\"alert alert-success\" role=\"alert\">%s</div>", $_REQUEST['Message']);
+            }
             $username = "mohh3660";
             $password = "glxcdj";
         
             $conn = new mysqli("vconroy.cs.uleth.ca",$username,$password,$username);
         
-            $sql = "SELECT * FROM CATEGORY";
+            $sql = "SELECT * FROM EVENTS";
         
             $result = $conn->query($sql);
 
             if($result->num_rows != 0) {
+                echo "<div><span class=\"headline\">Displaying all Events</span>
+                      <a class=\"float-right\" href=\"newevent.php\"><button class=\"btn btn-primary float-right\">New Event</button></a></div><br>";
                 while($row = $result->fetch_assoc()) {
                     echo "<div class=\"card\"><div class=\"card-body\">
-                        <h5 class=\"card-title\">$row[cname]</h5>
-                        <p class=\"card-text\">$row[desc]</p>
-                        <a href=\"posts.php?category=$row[id]\" class=\"btn btn-primary\">View Posts</a>
-                        </div></div><br>";
+                        <h5 class=\"card-title\">$row[title]</h5>
+                        <p class=\"card-text\">Hosted By: $row[uid]<br>
+                        Location: $row[location]<br>
+                        Date & Time: $row[date] $row[time]<br>
+                        Contact Information: $row[email]</p>
+                        <hr>
+                        <p class=\"card-text\">Description: $row[description]</p>";
+                    if($_COOKIE['username'] == $row['uid']) {
+                        echo "<a href=\"deleteEvent.php?eventId=$row[id]\" class=\"btn btn-danger\">Cancel Event</a>";
+                    }
+                        echo "</div></div><br>";
                 }
             } else {
-                echo "Unable to load Categories.";
+                echo "There are no events to display. Get started by creating a new event <a href=\"newevent.php\">here</a>.";
             }
             ?>
         </div>

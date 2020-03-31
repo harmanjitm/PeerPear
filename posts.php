@@ -24,11 +24,11 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <!-- Login Button -->
-                        <a class="nav-link" href="index.html">Login</a>
+                        <a class="nav-link" href="index.php">Login</a>
                     </li>
                     <li class="nav-item active">
                         <!-- Register Button -->
-                        <a class="nav-link" href="register.html">Register</a>
+                        <a class="nav-link" href="register.php">Register</a>
                     </li>
                 </ul>
             </div>
@@ -40,13 +40,15 @@
         <div class="container" style="margin-top:30px">
   <div class="row">
      
-     
-    
-
+     <div class = "col-md-12 text-right">
+  <a href="newpost.php" class = "btn btn-success "> <i class="fas fa-pencil-alt"></i> New Post </a>
    
+
+</div>
+
     <div class="col-sm-12 center-block">
 
-
+    
         <?php
 	if(isset($_COOKIE["username"])) {
             $username = "mohh3660";
@@ -57,16 +59,21 @@
             $sql = "SELECT * FROM POST WHERE cid = 1";
 
             $result = $conn->query($sql);
+            //$_POST[category]
+            echo "<p class = \"text-center\">Category</p>";
 
             if($result->num_rows != 0) {
                 while($row = $result->fetch_assoc()) {
                     echo "<div class=\"card w-75 mx-auto\">";
                     echo "<div class=\"card-body\">";
-                    echo "<h5 class = \"card-title\">$row[title]</h5>";
+                    echo "<h3 class = \"card-title\">$row[title]</h3>";
+                    echo "<p> <b><i class=\"fas fa-user-circle\"></i> $row[uid]</b></p>";
                     echo "<p class = \"card-text\">$row[body]</p>";
-                    echo "<p>Upvotes: $row[upvotes]</p>";
-                    echo "<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-arrow-up\"></i></a>";
-                    echo "<a href=\"#\" class=\"btn btn-primary\"><i class=\"fas fa-arrow-down\"></i></a>";
+                    echo "<div class=\"btn-group\" role=\"group\" aria-label=\"vote\">";
+                    echo "<a href=\"upvote.php?postid= $row[id]\" class=\"btn btn-outline-success\"><i class=\"fas fa-arrow-up\"></i></a>";
+                    echo "<button class=\"btn btn-secondary\" disabled><font size=\"1\">$row[upvotes]</font></button>";
+                    echo "<a href=\"downvote.php?postid= $row[id]\" class=\"btn btn-outline-danger\"><i class=\"fas fa-arrow-down\"></i></a>";
+                    echo "</div>";
                     echo "</div>";
                     echo "</div>";
                     echo "<br>";
@@ -89,7 +96,7 @@
      <br>
         <footer class="page-footer font-small bg-dark" style="height: 60px; width: 100%; position: absolute; bottom: 0;">
             <div class="footer-copyright text-center py-3 text-light">
-                © PeerPear
+            Copyright 2020 PeerPear 
             </div>
         </footer>
     </body>

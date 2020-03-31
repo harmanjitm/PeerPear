@@ -1,13 +1,3 @@
-<!-- <html>
-    <head>
-        <title>CPSC3660 - Profile</title>
-    </head>
-    <body>
-                
-	<p>To view all posts, click <a href="posts.php">here</a>.</p>
-    </body>
-</html> -->
-
 <html style="position: relative; min-height: 100%;">
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -33,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="categories.php">Categories</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="events.php">Events</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
@@ -53,7 +46,7 @@
         <?php
             if(isset($_COOKIE["username"])) {
             } else {
-                header('Location:login.php'); 
+                header('Location:login.php?Message=You have been logged out. Please login again.'); 
             }
         ?>
         <div class="container">
@@ -90,9 +83,14 @@
                             echo "Problem fetching profile.";
                         }
                     ?>
-                    <a href="editProfile.php">
-                        <button type="submit" class="btn btn-primary">Edit Profile</button>
-                    </a>
+                    <form id="delAccount" method="POST" action="deleteProfile.php"></form>
+                    <div>
+                        <a href="editProfile.php">
+                            <button type="submit" class="btn btn-primary">Edit Profile</button>
+                        </a>
+                        <button onclick="if(confirm('Are you sure you want to delete your account?')==true)
+                        {document.getElementById('delAccount').submit();}" type="submit" class="btn btn-danger text-right pull-right">Delete Account</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -105,3 +103,7 @@
         </footer>
     </body>
 </html>
+
+<script>
+
+</script>

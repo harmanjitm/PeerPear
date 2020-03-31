@@ -39,6 +39,15 @@
         <!-- Content -->
         <br>
         <div class="container">
+            <?php 
+                if(!empty($_REQUEST['Message']))
+                {
+                    echo sprintf("<div class=\"alert alert-success\" role=\"alert\">%s</div>", $_REQUEST['Message']);
+                } else if(!empty($_REQUEST['Error']))
+                {
+                    echo sprintf("<div class=\"alert alert-danger\" role=\"alert\">%s</div>", $_REQUEST['Error']);
+                }
+            ?>
             <form action="query_account.php" method="post" class="form-signin">
                 <img class="mb-4" src="images/logo.png" alt="" width="72" height="auto">
                 <h1 class="h3 mb-3 font-weight-normal">Please sign-in</h1>

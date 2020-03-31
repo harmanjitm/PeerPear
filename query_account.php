@@ -11,7 +11,7 @@ if(isset($_COOKIE["username"])) {
 
     $result = $conn->query($sql);
     if($result->num_rows != 1) {
-        echo "Username or password does not exist.\nRegister <a href=\"register.php\">here</a>.";
+        header('Location:login.php?Error=Invalid credentials. Please try again.');
     } else {
         setcookie("username",$_POST[username],time()+3600);
         setcookie("password",$_POST[password],time()+3600);
